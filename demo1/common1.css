@@ -1,0 +1,73 @@
+@CHARSET "utf-8";
+
+#header{
+	height:40px;
+	background-color:#040409;
+	color:white;
+	font-size:30px;
+	padding-top:10px;
+	text-align: center;
+}
+
+#content{
+	padding-top:20px;
+	padding-left:40px;
+	padding-bottom:20px;
+	color:#320f01;
+}
+
+#footer{
+	height:20px;
+	font-size:12px;
+	background-color:#040409;
+	color:white;
+	text-align: center;
+	padding-top:4px;
+}
+
+table{
+	border-collapse:collapse;
+	border-color:#b7badb;
+
+}
+table thead{
+	background-color:#cccee6;
+}
+table tbody{
+	background-color:#f5f9fe;
+}
+
+pre{
+	background-color:#ffded9;
+}
+
+dt{
+	padding-top:20px;
+	padding-bottom:4px;
+	font-weight:bold;
+}
+dd{
+	font-size:0.9em;
+	color:#223938;
+	padding-bottom:5px;
+	letter-spacing: 0.2em;
+}
+
+.sec1{
+	background-color:#ffaa9d;
+	border-style:solid;
+	border-width:2px;
+	border-color:#db2617;
+	padding:10px;
+	margin-bottom:50px;
+}
+.sec2{
+	padding:5px;
+	background-color:#ffded9;
+}
+
+.console{
+	background-color:#000000;
+	color:#ffffff;
+	padding:2px;
+}
