@@ -1,8 +1,15 @@
 
+var game;
+var g_err = null;
+/*
 var canvas; // ゲームキャンバス
 var ctx; // キャンバス・コンテキスト
 var g_canvas_width; // キャンバス横幅
 var g_canvas_height; // キャンバス立幅
+
+var g_frame_count = 0; // ゲームフレームカウント
+var g_fps_time =0;
+var g_fps = 0; // FPS*/
 
 
 // スタート　ここから処理を開始
@@ -17,6 +24,9 @@ $(()=>{
  */
 function init(){
 
+	game = new CrudBaseGame('game_canvas');
+
+/*■■■□□□■■■□□□
 	let gameCanvas = $('#game_canvas');
 	g_main_width = gameCanvas.width(); // 横幅を取得する
 	g_main_height = gameCanvas.height(); // 縦幅を取得する
@@ -30,6 +40,7 @@ function init(){
 	
 	// キャンバス・コンテキスト
 	ctx = canvas.getContext('2d');
+	*/
 	
 }
 
@@ -37,11 +48,40 @@ function init(){
  * 実行
  */
 function run(){
-	//requestAnimationFrame(run);
 
-	ctx.clearRect(0, 0, g_canvas_width, g_canvas_height); //一度canvasをクリア
+	try {
+		game.processBefore();
+
+		//game.drawText('Hello World ゲーム2', 70, 100);
+		
+		game.processAfter();
+
+	} catch (err) {
+		g_err = err;
+		throw err;
+	}
+
+	if(g_err==null){
+		requestAnimationFrame(run);
+	}else{
+		console.log('ゲーム停止');
+	}
+/*
+	ctx.clearRect(0, 0, g_main_width, g_main_height); //一度canvasをクリア
+
 	ctx.font = "30px 'Meiryo'";
 	ctx.fillText("hello world! こんにちは", 50, 100, 400);
 	ctx.stroke();//描画する
+	
+		// ■■■□□□■■■□□□後でリファクタリングします。
+	// FPSを測定して表示する。 FPSは1秒間のフレーム数
+	let fps_time = Date.now();
+	if(g_fps_time + 1000 < fps_time ){
+		g_fps_time = fps_time;
+		g_fps = g_frame_count;
+		g_frame_count = 0;
+	}
+	g_frame_count ++;
+	ctx.fillText("FPS:" + g_fps, 5, 50, 100);*/
 
 }
