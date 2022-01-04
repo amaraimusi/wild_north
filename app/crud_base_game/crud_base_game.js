@@ -2,6 +2,7 @@
 /**
  * CrudBaseゲーム
  * @note ゲームエンジン
+ *     基礎システムはこちらにて。
  * @since 2021-12-25
  * @auther amaraimusi
  * @version 1.0.0
@@ -68,13 +69,19 @@ class CrudBaseGame{
 
 	}
 	
+	/** ボックスのGetter
+	 */
+	getBox(){
+		return this.box;
+	}
+	
 	
 	/** 前処理
 	 */
 	processBefore(){
 		let box = this.box;
 		
-		game._clearScreen(); // 画面クリア
+		this._clearScreen(); // 画面クリア
 		box.fps_lap_time = Date.now(); // ラップタイムを取得
 		
 		// ▽デバッグ関連

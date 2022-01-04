@@ -1,5 +1,6 @@
 
-var game;
+var gm; // GameMaster
+var cbg;
 var g_err = null;
 /*
 var canvas; // ゲームキャンバス
@@ -24,7 +25,8 @@ $(()=>{
  */
 function init(){
 
-	game = new CrudBaseGame('game_canvas');
+	cbg = new CrudBaseGame('game_canvas');
+	gm = new GameMaster(cbg);
 
 /*■■■□□□■■■□□□
 	let gameCanvas = $('#game_canvas');
@@ -50,11 +52,13 @@ function init(){
 function run(){
 
 	try {
-		game.processBefore();
+		cbg.processBefore();
 
-		//game.drawText('Hello World ゲーム2', 70, 100);
+		gm.checkGamenActivate(); // 画面アクティブチェック
 		
-		game.processAfter();
+		//cbg.drawText('Hello World ゲーム2', 70, 100);■■■□□□■■■□□□
+		
+		cbg.processAfter();
 
 	} catch (err) {
 		g_err = err;
