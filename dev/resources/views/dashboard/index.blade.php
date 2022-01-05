@@ -58,7 +58,7 @@
 					<div class="card_msg">
 						<p class="card-text" style="height:80px">メッセージボードのデモ</p>
 					</div>
-					<a href="/crud_base_laravel8/outer/msg_board_example.php" class="btn btn-success">ページへ移動</a>
+					<a href="/wild_north/outer/msg_board_example.php" class="btn btn-success">ページへ移動</a>
 				</div>
 			</div>
 		</div>
@@ -87,7 +87,7 @@
 					<div class="card_msg">
 						<p class="card-text" style="height:80px">データベースのテーブル情報を表示/マスタ権限用</p>
 					</div>
-					<a href="/crud_base_laravel8/tool/data_info_tool.php" class="btn btn-primary">ページへ移動</a>
+					<a href="/wild_north/tool/data_info_tool.php" class="btn btn-primary">ページへ移動</a>
 				</div>
 			</div>
 		</div>
