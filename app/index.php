@@ -1,3 +1,10 @@
+<?php 
+session_start();
+$length = 10;
+$csrf_token = base_convert(mt_rand(pow(36, $length - 1), pow(36, $length) - 1), 10, 36);
+$_SESSION['csrf_token'] = $csrf_token;
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -18,6 +25,7 @@
 			<canvas id="game_canvas"  style="width:100%; height:100%; background-color:black;"></canvas>
 		</div>
 		
+		<input id="csrf_token" type="hidden" value='<?php echo $csrf_token; ?>' />
 	</body>
 	
 	

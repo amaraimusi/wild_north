@@ -20,6 +20,7 @@ class CrudBaseGameMaster{
 	constructor(game_canvas_xid, box){
 		
 		if (box == null) box = {};
+		this.box = box;
 		box['game_canvas_xid'] = game_canvas_xid;
 		if (box['resolution'] == null)  box['resolution'] = 1.5; // 解像度 0.3～2.0の葉にで指定すること。例→0.5:解像度低 1:解像度標準 1.5:解像度高
 
@@ -53,7 +54,6 @@ class CrudBaseGameMaster{
 		box['main_height'] = main_height; // メイン横幅
 		if (box['font'] == null)  box['font'] = null; // テキストフォント    画面に表示する文字のフォント
 
-		this.box = box;
 		
 		// ■■■□□□■■■□□□
 		this.test_backimage = new Image();
@@ -78,6 +78,13 @@ class CrudBaseGameMaster{
 			town:new TownController(this),
 		};
 		this.gamens = gamens;
+		
+		// Ajaxのセキュリティ
+		let csrf_token = $('#csrf_token').val();
+		box['csrf_token'] = csrf_token;
+		box['ajax_url_load_data'] = 'xxx';// ■■■□□□■■■□□□
+		
+		
 
 	}
 	
