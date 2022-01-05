@@ -20,7 +20,7 @@ $_SESSION['csrf_token'] = $csrf_token;
 	</head>
 	
 	<body>
-
+		<div id="err" style="color:red"></div>
 		<div>
 			<canvas id="game_canvas"  style="width:100%; height:100%; background-color:black;"></canvas>
 		</div>

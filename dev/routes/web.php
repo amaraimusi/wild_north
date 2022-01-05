@@ -45,7 +45,6 @@ Route::post('user_mng/ajax_pwms', 'App\Http\Controllers\UserMngController@ajax_p
 Route::get('user_mng/csv_download', 'App\Http\Controllers\UserMngController@csv_download');
 Route::post('user_mng/bulk_reg', 'App\Http\Controllers\UserMngController@bulk_reg');
 
-
 // BackImg
 Route::get('back_img', 'App\Http\Controllers\BackImgController@index');
 Route::post('back_img/ajax_reg', 'App\Http\Controllers\BackImgController@ajax_reg');

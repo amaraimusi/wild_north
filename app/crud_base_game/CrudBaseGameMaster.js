@@ -80,13 +80,64 @@ class CrudBaseGameMaster{
 		this.gamens = gamens;
 		
 		// Ajaxのセキュリティ
-		let csrf_token = $('#csrf_token').val();
-		box['csrf_token'] = csrf_token;
-		box['ajax_url_load_data'] = 'xxx';// ■■■□□□■■■□□□
+		box['ajax_url_load_data'] = '/wild_north/dev/public/public_game/load_data';// ■■■□□□■■■□□□
 		
-		
+		this.ajaxLoadData(box); // Ajax通信でゲームデータを読み取る
 
 	}
+	
+	// Ajax通信でゲームデータを読み取る
+	ajaxLoadData(box){
+		
+		let sendData={neko_name:'cat&dog%',same:{hojiro:'ホオジロザメ',shumoku:'シュモクザメ'}};
+		
+		// データ中の「&」と「%」を全角の＆と％に一括エスケープ(&記号や%記号はPHPのJSONデコードでエラーになる)
+		sendData = this._escapeAjaxSendData(sendData);
+		
+		let fd = new FormData();
+		
+		let send_json = JSON.stringify(sendData);//データをJSON文字列にする。
+		fd.append( "key1", send_json );
+		
+		// CSRFトークンを取得
+		let csrf_token = jQuery('#csrf_token').val();
+		fd.append( "csrf_token", csrf_token );
+		
+		let ajax_url =box.ajax_url_load_data;
+		
+		// AJAX
+		jQuery.ajax({
+			type: "post",
+			url: ajax_url,
+			data: fd,
+			cache: false,
+			dataType: "text",
+			processData: false,
+			contentType : false,
+		})
+		.done((res_json, type) => {
+			let res;
+			try{
+				res =jQuery.parseJSON(res_json);//パース
+			}catch(e){
+				jQuery("#err").append(res_json);
+				return;
+			}
+			console.log(res);//■■■□□□■■■□□□
+			this.box['gameData'] = res;
+			
+			
+			
+			
+		})
+		.fail((jqXHR, statusText, errorThrown) => {
+			let errElm = jQuery('#err');
+			errElm.append('アクセスエラー');
+			errElm.append(jqXHR.responseText);
+			alert(statusText);
+		});
+	}
+	
 	
 	/** ボックスのGetter
 	 */
@@ -204,6 +255,31 @@ class CrudBaseGameMaster{
 	 */
 	backImage(back_img_id){
 		console.log('背景画像を配置');//■■■□□□■■■□□□
+	}
+	
+		/**
+	 * データ中の「&」と「%」を全角の＆と％に一括エスケープ
+	 * 
+	 * @note
+	 * PHPのJSONデコードでエラーになるので、＆記号をエスケープ。％記号も後ろに数値がつくとエラーになるのでエスケープ
+	 * これらの記号はMySQLのインポートなどでエラーになる場合があるのでその予防。
+	 * @param mixed data エスケープ対象 :文字列、オブジェクト、配列を指定可
+	 * @returns エスケープ後
+	 */
+	_escapeAjaxSendData(data){
+		if (typeof data == 'string'){
+			data = data.replace(/&/g, '＆');
+			data = data.replace(/%/g, '％');
+			return data;
+
+		}else if (typeof data == 'object'){
+			for(var i in data){
+				data[i] = this._escapeAjaxSendData(data[i]);
+			}
+			return data;
+		}else{
+			return data;
+		}
 	}
 	
 }
