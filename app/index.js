@@ -25,8 +25,7 @@ $(()=>{
  */
 function init(){
 
-	cbg = new CrudBaseGame('game_canvas');
-	gm = new GameMaster(cbg);
+	gm = new CrudBaseGameMaster('game_canvas');
 
 /*■■■□□□■■■□□□
 	let gameCanvas = $('#game_canvas');
@@ -52,13 +51,15 @@ function init(){
 function run(){
 
 	try {
-		cbg.processBefore();
+		gm.processBefore();
 
 		gm.checkGamenActivate(); // 画面アクティブチェック
 		
-		//cbg.drawText('Hello World ゲーム2', 70, 100);■■■□□□■■■□□□
+		//gm.drawText('Hello World ゲーム2', 70, 100);■■■□□□■■■□□□
 		
-		cbg.processAfter();
+		gm.draw(); // 描画処理
+		
+		gm.processAfter();
 
 	} catch (err) {
 		g_err = err;
