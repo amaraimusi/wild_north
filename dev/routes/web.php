@@ -45,23 +45,17 @@ Route::post('user_mng/ajax_pwms', 'App\Http\Controllers\UserMngController@ajax_p
 Route::get('user_mng/csv_download', 'App\Http\Controllers\UserMngController@csv_download');
 Route::post('user_mng/bulk_reg', 'App\Http\Controllers\UserMngController@bulk_reg');
 
-// MsgBoard
-Route::get('msg_board', 'App\Http\Controllers\MsgBoardController@index');
-Route::post('msg_board/ajax_reg', 'App\Http\Controllers\MsgBoardController@ajax_reg');
-Route::post('msg_board/ajax_delete', 'App\Http\Controllers\MsgBoardController@ajax_delete');
-Route::post('msg_board/auto_save', 'App\Http\Controllers\MsgBoardController@auto_save');
-Route::post('msg_board/ajax_pwms', 'App\Http\Controllers\MsgBoardController@ajax_pwms');
-Route::get('msg_board/csv_download', 'App\Http\Controllers\MsgBoardController@csv_download');
-Route::post('msg_board/bulk_reg', 'App\Http\Controllers\MsgBoardController@bulk_reg');
 
-// MsgBoardGood
-Route::get('msg_board_good', 'App\Http\Controllers\MsgBoardGoodController@index');
-Route::post('msg_board_good/ajax_reg', 'App\Http\Controllers\MsgBoardGoodController@ajax_reg');
-Route::post('msg_board_good/ajax_delete', 'App\Http\Controllers\MsgBoardGoodController@ajax_delete');
-Route::post('msg_board_good/auto_save', 'App\Http\Controllers\MsgBoardGoodController@auto_save');
-Route::post('msg_board_good/ajax_pwms', 'App\Http\Controllers\MsgBoardGoodController@ajax_pwms');
-Route::get('msg_board_good/csv_download', 'App\Http\Controllers\MsgBoardGoodController@csv_download');
-Route::post('msg_board_good/bulk_reg', 'App\Http\Controllers\MsgBoardGoodController@bulk_reg');
+// BackImg
+Route::get('back_img', 'App\Http\Controllers\BackImgController@index');
+Route::post('back_img/ajax_reg', 'App\Http\Controllers\BackImgController@ajax_reg');
+Route::post('back_img/ajax_delete', 'App\Http\Controllers\BackImgController@ajax_delete');
+Route::post('back_img/auto_save', 'App\Http\Controllers\BackImgController@auto_save');
+Route::post('back_img/ajax_pwms', 'App\Http\Controllers\BackImgController@ajax_pwms');
+Route::get('back_img/csv_download', 'App\Http\Controllers\BackImgController@csv_download');
+Route::post('back_img/bulk_reg', 'App\Http\Controllers\BackImgController@bulk_reg');
+
+
 
 Auth::routes();
 

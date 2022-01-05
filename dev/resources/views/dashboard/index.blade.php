@@ -52,13 +52,13 @@
 	
 		<!-- カード -->
 		<div class="col-sm-3">
-			<div class="card border-success ">
+			<div class="card border-primary ">
 				<div class="card-body" >
-					<h5 class="card-title text-success" style="font-weight:bold">見本メッセージボード</h5>
+					<h5 class="card-title text-primary" style="font-weight:bold">見本管理画面</h5>
 					<div class="card_msg">
-						<p class="card-text" style="height:80px">メッセージボードのデモ</p>
+						<p class="card-text" style="height:80px">管理画面の見本です。このシステムを元に様々なWEBシステムを開発しています。</p>
 					</div>
-					<a href="/wild_north/outer/msg_board_example.php" class="btn btn-success">ページへ移動</a>
+					<a href="{{url('/neko')}}" class="btn btn-primary">ページへ移動</a>
 				</div>
 			</div>
 		</div>
@@ -67,14 +67,16 @@
 		<div class="col-sm-3">
 			<div class="card border-primary ">
 				<div class="card-body" >
-					<h5 class="card-title text-primary" style="font-weight:bold">メッセージボード管理</h5>
+					<h5 class="card-title text-primary" style="font-weight:bold">背景画像管理画面</h5>
 					<div class="card_msg">
-						<p class="card-text" style="height:80px">メッセージボード管理画面の見本</p>
+						<p class="card-text" style="height:80px">背景画像ファイルの管理</p>
 					</div>
-					<a href="{{url('msg_board')}}" class="btn btn-primary">ページへ移動</a>
+					<a href="{{url('/back_img')}}" class="btn btn-primary">ページへ移動</a>
 				</div>
 			</div>
 		</div>
+	
+
 		
 	</div><!--  row -->
 

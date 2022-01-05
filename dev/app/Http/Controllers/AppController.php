@@ -60,7 +60,10 @@ class AppController {
 	protected function setCommonToEntity($ent){
 		
 		// 更新ユーザーの取得とセット
-		$update_user = \Auth::user()->name; // ユーザー名
+	    $update_user = 'none';
+	    if(!empty(\Auth::user())){
+	        $update_user = \Auth::user()->name; // ユーザー名
+	    }
 		$ent['update_user'] = $update_user;
 		
 		// ユーザーエージェントの取得とセット
