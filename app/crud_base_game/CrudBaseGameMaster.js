@@ -80,7 +80,7 @@ class CrudBaseGameMaster{
 		this.gamens = gamens;
 		
 		// Ajaxのセキュリティ
-		box['ajax_url_load_data'] = '/wild_north/dev/public/public_game/load_data';// ■■■□□□■■■□□□
+		box['ajax_url_load_data'] = '/wild_north/app/ajax/load_game_data.php';// ■■■□□□■■■□□□
 		
 		this.ajaxLoadData(box); // Ajax通信でゲームデータを読み取る
 

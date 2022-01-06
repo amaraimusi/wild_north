@@ -28,7 +28,7 @@ $server_name=$_SERVER['SERVER_NAME'];
 if($server_name != 'localhost') die('ローカル環境 only');
 	
 $home_dp = dirname(dirname(__DIR__));
-require_once __DIR__ . '/../dev/vendor/CrudBase/PdoDao.php';
+require_once __DIR__ . '/../../dev/vendor/CrudBase/PdoDao.php';
 
 $dbConf = [
 	'host' => 'localhost',
