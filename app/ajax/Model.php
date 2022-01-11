@@ -16,13 +16,14 @@ class Model{
     }
     
     public function getBackImgHm(){
-        $backImgData = $this->dao->query('SELECT * FROM back_imgs WHERE delete_flg=0');
-        
+        $backImgData = $this->dao->getData('SELECT * FROM back_imgs WHERE delete_flg=0');
+
         $backImgHm = [];
         foreach($backImgData as $ent){
             $id = $ent['id'];
-            $backImgHm[$id] = $backImgData;
+            $backImgHm[$id] = $ent;
         }
+
         return $backImgHm;
 
     }

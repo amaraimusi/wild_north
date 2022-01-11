@@ -12,7 +12,9 @@ $_SESSION['csrf_token'] = $csrf_token;
 		<title>Wild North</title>
 		<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
 		
+		<script type="text/javascript" src="CrudBaseGameConfig.js"></script>
 		<script type="text/javascript" src="crud_base_game/CbgDebug.js"></script>
+		<script type="text/javascript" src="crud_base_game/CbgDraw.js"></script>
 		<script type="text/javascript" src="crud_base_game/CrudBaseGameMaster.js"></script>
 		<script type="text/javascript" src="controller/TownController.js"></script>
 		

@@ -71,22 +71,6 @@ function run(){
 	}else{
 		console.log('ゲーム停止');
 	}
-/*
-	ctx.clearRect(0, 0, g_main_width, g_main_height); //一度canvasをクリア
 
-	ctx.font = "30px 'Meiryo'";
-	ctx.fillText("hello world! こんにちは", 50, 100, 400);
-	ctx.stroke();//描画する
-	
-		// ■■■□□□■■■□□□後でリファクタリングします。
-	// FPSを測定して表示する。 FPSは1秒間のフレーム数
-	let fps_time = Date.now();
-	if(g_fps_time + 1000 < fps_time ){
-		g_fps_time = fps_time;
-		g_fps = g_frame_count;
-		g_frame_count = 0;
-	}
-	g_frame_count ++;
-	ctx.fillText("FPS:" + g_fps, 5, 50, 100);*/
 
 }

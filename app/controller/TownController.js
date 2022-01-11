@@ -22,6 +22,6 @@ class TownController{
 	// ビュー。レイアウトの配置
 	view(){
 		let gm = this.gm;
-		gm.backImage(1); // 背景画像を配置
+		gm.backImage(3); // 背景画像を配置
 	}
 }

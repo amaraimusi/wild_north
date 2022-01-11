@@ -54,6 +54,7 @@ class CrudBaseGameMaster{
 		box['main_height'] = main_height; // メイン横幅
 		if (box['font'] == null)  box['font'] = null; // テキストフォント    画面に表示する文字のフォント
 
+		this.cbgDraw = new CbgDraw(this, ctx); // 描画クラスの生成
 		
 		// ■■■□□□■■■□□□
 		this.test_backimage = new Image();
@@ -69,15 +70,11 @@ class CrudBaseGameMaster{
 		console.log(this.test_chara);//■■■□□□■■■□□□
 
 		// 各画面コントローラ関連のプロパティ
-		box['gamen_code'] = 'town'; // 画面コード
-		box['prev_gamen_code'] = ''; // 前フレーム画面コード
+		box['gamen_code'] = null; // 画面コード
+		box['prev_gamen_code'] = null; // 前フレーム画面コード
 		
 		
-		// 各画面コントローラオブジェクトの生成
-		let gamens = {
-			town:new TownController(this),
-		};
-		this.gamens = gamens;
+
 		
 		// Ajaxのセキュリティ
 		box['ajax_url_load_data'] = '/wild_north/app/ajax/load_game_data.php';// ■■■□□□■■■□□□
@@ -126,7 +123,7 @@ class CrudBaseGameMaster{
 			console.log(res);//■■■□□□■■■□□□
 			this.box['gameData'] = res;
 			
-			
+			this.initAfterAjax();
 			
 			
 		})
@@ -136,6 +133,22 @@ class CrudBaseGameMaster{
 			errElm.append(jqXHR.responseText);
 			alert(statusText);
 		});
+	}
+	
+	/** Ajaxによるゲームデータロード後の初期化
+	 */
+	initAfterAjax(){
+		
+		let box = this.box;
+		
+		// 各画面コントローラ関連のプロパティ
+		box['gamen_code'] = 'town'; // 画面コード
+		
+		// 各画面コントローラオブジェクトの生成
+		let gamens = {
+			town:new TownController(this),
+		};
+		this.gamens = gamens;
 	}
 	
 	
@@ -161,6 +174,9 @@ class CrudBaseGameMaster{
 	draw(){
 		let box = this.box;
 		
+		this.cbgDraw.draw();
+		
+		/*■■■□□□■■■□□□
 		this.ctx.drawImage(this.test_backimage,
 	            0,  // sx      (元画像の切り抜き始点X)
 	            0,  // sy      (元画像の切り抜き始点Y)
@@ -170,7 +186,7 @@ class CrudBaseGameMaster{
 	            0,  // dy      (Canvasの描画開始位置Y)
 	            (box.main_width + 10) * box.resolution ,  // dWidth  (Canvasの描画サイズ：横幅) ※ 「+10」は補正値
 	            box.main_height * box.resolution   // dHeight (Canvasの描画サイズ：高さ)
-       		);
+       		);*/
 		
 		    this.ctx.drawImage(this.test_chara,
 	            0,  // sx      (元画像の切り抜き始点X)
@@ -239,11 +255,12 @@ class CrudBaseGameMaster{
 	checkGamenActivate(){
 		let box = this.box;
 		
+		if (box.gamen_code ==null) return;
+		
 		if(box.gamen_code != box.prev_gamen_code){
 			
 			let gamen = this.gamens[box.gamen_code];
 			gamen.activate();
-			
 			
 			box.prev_gamen_code = box.gamen_code;
 		}
@@ -254,7 +271,7 @@ class CrudBaseGameMaster{
 	 *  @param int back_img_id 背景画像ID
 	 */
 	backImage(back_img_id){
-		console.log('背景画像を配置');//■■■□□□■■■□□□
+		this.cbgDraw.backImg(back_img_id);
 	}
 	
 		/**
@@ -281,5 +298,6 @@ class CrudBaseGameMaster{
 			return data;
 		}
 	}
+	
 	
 }
