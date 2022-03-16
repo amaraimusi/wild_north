@@ -340,5 +340,21 @@ class UserMng extends AppModel
 	}
 	// CBBXE
 	
+	/**
+	 * ユーザー名の重複チェック
+	 * @param string $name ユーザー名
+	 * @return bool true:無問題, false:重複あり
+	 */
+	public function  checkNameDuplication($name){
+	    $name = $this->sqlSanitizeW($name);
+	    $sql = "SELECT id,email FROM users WHERE name='{$name}';";
+	    
+	    $res = $this->cb->selectValue($sql);
+	    
+	    if(!empty($res)) return false;
+	    return true;
+	    
+	}
+	
 	
 }

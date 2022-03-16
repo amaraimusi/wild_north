@@ -64,6 +64,24 @@ class Neko extends AppModel
 		$this->setTableName($this->table); // 親クラスにテーブル名をセット
 	}
 	
+	
+	/**
+	 * SQLを実行してエンティティを取得する
+	 * @param string $sql
+	 * @return [] エンティティ
+	 */
+	public function selectEntity2($sql){
+	    $res = \DB::select($sql);
+	    
+	    $ent = [];
+	    if(!empty($res)){
+	        $ent = current($res);
+	        $ent = (array)$ent;
+	    }
+	    
+	    return $ent;
+	}
+	
 	/**
 	 * 検索条件とページ情報を元にDBからデータを取得する
 	 * @param array $crudBaseData
@@ -295,9 +313,10 @@ class Neko extends AppModel
 	 *  - form_type フォーム種別  new_inp:新規入力 edit:編集 delete:削除
 	 *  - ni_tr_place 新規入力追加場所フラグ 0:末尾(デフォルト） , 1:先頭
 	 *  - tbl_name DBテーブル名
+	 *  - whiteList ホワイトリスト（省略可)
 	 * @return [] エンティティ(insertされた場合、新idがセットされている）
 	 */
-	public function saveEntity(&$ent, &$regParam){
+	public function saveEntity(&$ent, $regParam=[]){
 	    
 		return $this->cb->saveEntity($ent, $regParam);
 
@@ -312,6 +331,46 @@ class Neko extends AppModel
 	 */
 	public function saveAll(&$data){
 		return $this->cb->saveAll($data);
+	}
+	
+	/**
+	 * エンティティのDB保存
+	 * @param [] $ent エンティティ
+	 * @return [] エンティティ(insertされた場合、新idがセットされている）
+	 */
+	public function saveEntity2($ent){
+	    
+	    $ent = $this->setCommonToEntity($ent);
+	    
+	    $ent = array_intersect_key($ent, array_flip($this->fillable));
+	    
+	    // 患者テーブルへDB更新
+	    if(empty($ent['id'])){
+	        // ▽ idが空であればINSERTをする。
+	        $id = $this->insertGetId($ent); // INSERT
+	        $ent['id'] = $id;
+	    }else{
+	        
+	        // ▽ idが空でなければUPDATEする。
+	        $this->updateOrCreate(['id'=>$ent['id']], $ent); // UPDATE
+	    }
+	    
+	    return $ent;
+	    
+	}
+	
+	
+	/**
+	 * データのDB保存
+	 * @param [] $data データ←エンティティの配列
+	 */
+	public function saveData($data){
+	    $data2 = [];
+	    foreach($data as $ent){
+	        $ent2 = $this->saveEntity($ent);
+	        $data2[] = $ent2;
+	    }
+	    return $data2;
 	}
 	
 	

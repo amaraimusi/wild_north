@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['web_api/cors_test' ,'api/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
 

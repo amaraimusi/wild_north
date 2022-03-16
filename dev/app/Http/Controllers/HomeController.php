@@ -24,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // ログアウトになっていたらログイン画面にリダイレクト
+        if(\Auth::id() == null){
+            return redirect('login');
+        }
+        
         return view('home');
     }
 }

@@ -20,10 +20,10 @@ class DashboardController extends AppController
 	 */
 	public function index(){
 		
-		
-		if(\Auth::id() == null ){
-			return redirect('home');
-		}
+	    // ログアウトになっていたらログイン画面にリダイレクト
+	    if(\Auth::id() == null){
+	        return redirect('login');
+	    }
 		
 		$this->init();
 		

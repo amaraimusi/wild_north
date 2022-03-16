@@ -1,6 +1,6 @@
 /*
-*‹¤’Ê
-*@date 2015-4-7
+*
+*@date 2015-4-7 | 2022-2-24
 */
 @CHARSET "utf-8";
 
@@ -8,9 +8,10 @@ body{
 	color:#333839;
 	font-size:14px;
 	line-height:1.8em;
-	font-family: "Lucida Grande", "Lucida Sans Unicode", "Hiragino Kaku Gothic Pro", "ƒqƒ‰ƒMƒmŠpƒS Pro W3", "ƒƒCƒŠƒI", Meiryo, "‚l‚r ‚oƒSƒVƒbƒN", Helvetica, Arial, Verdana, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Hiragino Kaku Gothic Pro", "ï¿½qï¿½ï¿½ï¿½Mï¿½mï¿½pï¿½S Pro W3", "ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½I", Meiryo, "ï¿½lï¿½r ï¿½oï¿½Sï¿½Vï¿½bï¿½N", Helvetica, Arial, Verdana, sans-serif;
 
 }
+
 time{
 	font-size:0.9em;
 	color:#6c6c6c;
@@ -49,7 +50,7 @@ p{
 
 pre{
 	background-color:#fef2f1;
-	-moz-tab-size: 2 ;	/* Firefox—p */
+	-moz-tab-size: 2 ;	/* Firefoxï¿½p */
 	tab-size: 2 ;
 }
 
@@ -190,7 +191,6 @@ aside{
 }
 
 
-/* Ğ‰îƒ\[ƒXƒR[ƒh */
 .intro_source_code{
 	background-color:#fafcfb;
 	font-size:1.2em;

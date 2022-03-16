@@ -59,7 +59,7 @@ class AppController {
 	// 更新ユーザーなど共通フィールドをセットする。
 	protected function setCommonToEntity($ent){
 		
-		// 更新ユーザーの取得とセット
+	    // 更新ユーザーの取得とセット
 	    $update_user = 'none';
 	    if(!empty(\Auth::user())){
 	        $update_user = \Auth::user()->name; // ユーザー名
@@ -158,6 +158,7 @@ class AppController {
 			$userInfo['update_user'] = $userInfo['username'];
 			$userInfo['email'] = \Auth::user()->email; // メールアドレス
 			$userInfo['role'] = \Auth::user()->role; // メールアドレス
+			$userInfo['nickname'] = \Auth::user()->nickname; // メールアドレス
 		}
 		
 		$userInfo['ip_addr'] = $_SERVER["REMOTE_ADDR"];// IPアドレス
@@ -232,6 +233,5 @@ class AppController {
 		return $authority;
 	}
 	
-
 
 }

@@ -111,7 +111,8 @@ class CrudBaseAutoSave{
 			
 		})
 		.fail((jqXHR, statusText, errorThrown) => {
-			this.msgElm.html('自動保存のエラー2');
+			this.msgElm.html('自動保存のエラー');
+			console.log(jqXHR);
 			jQuery('#err').html(jqXHR.responseText);
 		});
 		

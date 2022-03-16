@@ -6,7 +6,7 @@ extract($masters, EXTR_REFS);
 
 require_once $crud_base_path . 'CrudBaseHelper.php';
 $cbh = new CrudBaseHelper($crudBaseData);
-$ver_str = '?v=' . $version; // キャッシュ回避のためのバージョン文字列
+$ver_str = '?v=' . $this_page_version; // キャッシュ回避のためのバージョン文字列
 
 
 ?>
@@ -23,6 +23,8 @@ $ver_str = '?v=' . $version; // キャッシュ回避のためのバージョン
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/js/font/css/open-iconic.min.css') }}" rel="stylesheet">
 	<link href="{{ $crud_base_css . $ver_str }}" rel="stylesheet">
+	<link href="{{ asset('/css/common.css')  . $ver_str}}" rel="stylesheet">
+	<link href="{{ asset('/css/Neko/index.css') . $ver_str }}" rel="stylesheet">
 	
 </head>
 <body>
@@ -33,8 +35,8 @@ $ver_str = '?v=' . $version; // キャッシュ回避のためのバージョン
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ url('/') }}">ホーム</a></li>
-    <li class="breadcrumb-item active" aria-current="page">ネコ管理画面</li>
+	<li class="breadcrumb-item"><a href="{{ url('/') }}">ホーム</a></li>
+	<li class="breadcrumb-item active" aria-current="page">ネコ管理画面</li>
   </ol>
 </nav>
 
@@ -44,7 +46,7 @@ $ver_str = '?v=' . $version; // キャッシュ回避のためのバージョン
 	<div id="ajax_login_with_cake"></div><!-- ログイン or ログアウト 　AjaxLoginWithCake.js　-->
 	<div class="cb_kj_main">
 	<!-- 検索条件入力フォーム -->
-	<form action="" class="form_kjs" id="nekoIndexForm" method="post" accept-charset="utf-8">
+	<div class="form_kjs" id="nekoIndexForm" method="post" accept-charset="utf-8">
 		
 		<?php $cbh->inputKjMain('kj_main','',null,'ネコ名、備考を検索する');?>
 		<input type='button' value='検索' onclick='searchKjs()' class='search_kjs_btn btn btn-success btn-sm' />
@@ -89,7 +91,8 @@ $ver_str = '?v=' . $version; // キャッシュ回避のためのバージョン
 				
 				<input id="crud_base_json" type="hidden" value='<?php echo $crud_base_json?>' />
 		</div>
-	</form>
+		<div id="app"></div><!-- vue.js -->
+	</div><!-- form_kjs -->
 	</div><!-- cb_kj_main -->
 	<div id="cb_func_btns" class="btn-group" >
 		<button type="button" onclick="jQuery('#detail_div').toggle(300);" class="btn btn-secondary btn-sm">ツール</button>
@@ -119,25 +122,25 @@ $ver_str = '?v=' . $version; // キャッシュ回避のためのバージョン
 	 			$csv_dl_url =  'neko/csv_download';
 	 			$cbh->makeCsvBtns($csv_dl_url);
 			?>
+			
 			<button id="crud_base_bulk_add_btn" type="button" class="btn btn-secondary btn-sm" onclick="crudBase.crudBaseBulkAdd.showForm()" >一括追加</button>
+			
+			<!-- CrudBase設定 -->
+			<div id="crud_base_config" style="display:inline-block"></div>
+			
+			<button id="calendar_view_k_btn" type="button" class="btn btn-secondary btn-sm" onclick="calendarViewKShow()" >カレンダーモード</button>
+			
+			<button type="button" class="btn btn-secondary btn-sm" onclick="sessionClear()" >セッションクリア</button>
+		
+			<button id="table_transform_tbl_mode" type="button" class="btn btn-secondary btn-sm" onclick="tableTransform(0)" style="display:none">一覧の変形・テーブルモード</button>	
+			<button id="table_transform_div_mode" type="button" class="btn btn-secondary btn-sm" onclick="tableTransform(1)" >一覧の変形・スマホモード</button>
 		</div>
 		<div style="display:inline-block;text-align:right;width:24%;">
 			<button type="button" class="btn btn-secondary btn-sm" onclick="jQuery('#detail_div').toggle(300);">閉じる</button>
 		</div>
 	</div><!-- main_tools -->
 	
-	<div id="sub_tools">
-		<!-- CrudBase設定 -->
-		<div id="crud_base_config" style="display:inline-block"></div>
-		
-		<button id="calendar_view_k_btn" type="button" class="btn btn-secondary btn-sm" onclick="calendarViewKShow()" >カレンダーモード</button>
-		
-		<button type="button" class="btn btn-secondary btn-sm" onclick="sessionClear()" >セッションクリア</button>
-	
-		<button id="table_transform_tbl_mode" type="button" class="btn btn-secondary btn-sm" onclick="tableTransform(0)" style="display:none">一覧の変形・テーブルモード</button>	
-		<button id="table_transform_div_mode" type="button" class="btn btn-secondary btn-sm" onclick="tableTransform(1)" >一覧の変形・スマホモード</button>
-		
-	</div><!-- sub_tools -->
+
 </div><!-- detail_div -->
 
 <input type="hidden" id="csrf_token" value="{{ csrf_token() }}" >
@@ -154,7 +157,7 @@ $ver_str = '?v=' . $version; // キャッシュ回避のためのバージョン
 <div id="crud_base_auto_save_msg" style="height:20px;" class="text-success"></div>
 
 <?php if(!empty($data)){ ?>
-	<button type="button" class="btn btn-warning btn-sm" onclick="newInpShow(this, 'add_to_top');">新規追加</span></button>
+	<button type="button" class="btn btn-warning btn-sm" onclick="newInpShow(this, 'add_to_top');">新規追加</button>
 <?php } ?>
 
 
@@ -225,7 +228,7 @@ foreach($data as $i=>&$ent){
 <?php $cbh->divPagenationB(); ?>
 <br>
 	
-<button type="button" class="btn btn-warning btn-sm" onclick="newInpShow(this, 'add_to_bottom');">新規追加</span></button>	
+<button type="button" class="btn btn-warning btn-sm" onclick="newInpShow(this, 'add_to_bottom');">新規追加</button>	
 
 <?php $cbh->divPwms(); // 複数有効/削除の区分を表示する ?>
 

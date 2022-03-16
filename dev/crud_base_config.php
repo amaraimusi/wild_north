@@ -34,16 +34,19 @@ $crud_base_app_path = $crud_base_root . 'app' . DIRECTORY_SEPARATOR;
 define('CRUD_BASE_APP_PATH', $crud_base_app_path);
 
 
-$crud_base_path = dirname(__FILE__) . '/vendor/CrudBase/';
+$crud_base_path = dirname(__FILE__) . '/app/CrudBase/';
 define('CRUD_BASE_PATH', $crud_base_path);
 
-$crud_base_project_path = '/wild_north/dev/public'; // 例：「/animal/mng」
+//$crud_base_project_path = '/yobidashi/dev/public'; // 例：「/animal/mng」
+//$crud_base_project_path = rtrim(dirname($_SERVER['REQUEST_URI']), '/');
+$crud_base_project_path = rtrim(dirname($_SERVER["SCRIPT_NAME"]), '/'); 
+
 define('CRUD_BASE_PROJECT_PATH', $crud_base_project_path); // 基本URL(非推奨）
 
 $crud_base_url_base = $crud_base_project_path . '/';
 define('CRUD_BASE_URL_BASE', $crud_base_url_base); // 基本URL
 
-$crud_base_storage_url = '/wild_north/dev/public/'; // ストレージ基本URL（添付ファイルの置き場所） 例→「/wild_north/dev/public/」
+$crud_base_storage_url = $crud_base_project_path; // ストレージ基本URL（添付ファイルの置き場所） 例→「/yobidashi/dev/public/」
 define('CRUD_BASE_STORAGE_URL', $crud_base_storage_url);
 
 $crud_base_js = $crud_base_project_path . "/js/CrudBase/dist/CrudBase.min.js?v=" . CRUD_BASE_VERSION;
@@ -66,11 +69,7 @@ $crudBaseConfig = [
     'crud_base_url_base'=>CRUD_BASE_URL_BASE, // 基本URL
     'crud_base_storage_url'=>CRUD_BASE_STORAGE_URL, // ストレージ基本URL
 	
-	//'crud_base_webroot_abs_path'=>$crud_base_webroot_abs_path,■■■□□□■■■□□□
 ];
-
-// DB設定情報を取得する
-$crudBaseConfig['dbConfig'] = getDbConfigForCrudBase($crudBaseConfig['env']);
 
 // 汎用メソッドクラス
 require_once $crud_base_path . 'crud_base_function.php';
@@ -108,6 +107,8 @@ $crudBaseAuthorityData = [
 ];
 
 
+require_once 'crud_base_const.php';
+
 /**
  * DB設定
  * @return string[] DB設定情報
@@ -116,7 +117,7 @@ function getDbConfigForCrudBase($env = null){
 	
 	$dbConfig = [
 		'host'=>'localhost',
-		'db_name'=>'wild_north',
+		'db_name'=>'crud_base_laravel8',
 		'user'=>'root',
 		'pw'=>''
 	];

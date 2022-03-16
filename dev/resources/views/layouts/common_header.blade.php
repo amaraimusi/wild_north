@@ -6,6 +6,8 @@
 	if(!empty($crudBaseData['userInfo']['authority'])){
 		$userInfo = $crudBaseData['userInfo'];
 		$user_name = $userInfo['user_name'];
+		$nickname = $userInfo['nickname'];
+		if(empty($nickname)) $nickname = $user_name;
 		$auth_level = $userInfo['authority']['level'];
 		$authority_wamei = $userInfo['authority']['wamei'];
 	}
@@ -37,7 +39,7 @@
 			<li class="nav-item dropdown">
 				@auth
 					<a class="nav-link dropdown-toggle text-light" href="#" id="username_navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						{{$user_name}}
+						{{$nickname}}
 					</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="username_navbarDropdownMenuLink">
 						<span class="dropdown-item">{{$authority_wamei}}</span>

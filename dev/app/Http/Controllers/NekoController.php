@@ -15,14 +15,16 @@ class NekoController extends AppController
 	private $cb; // CrudBase制御クラス
 	private $md; // モデル
 	
-	private $login_needed_flg = false; // ログイン必須フラグ（編集系で認証を必須とするか？）
-
-	
 	/**
 	 * ネコCRUDページ
 	 */
 	public function index(){
 	    
+// 	    // ログアウトになっていたらログイン画面にリダイレクト
+//         if(\Auth::id() == null){
+//             return redirect('login');
+//         }
+    
 		$this->init();
 
  		// CrudBase共通処理（前）
@@ -71,9 +73,11 @@ class NekoController extends AppController
 		
 		$errs = []; // エラーリスト
 		
-		if(\Auth::id() == null && $this->login_needed_flg == true){
-			return 'Error:ログイン認証が必要です。 Login is needed';
-		}
+// 		// すでにログアウトになったらlogoutであることをフロントエンド側に知らせる。
+// 		if(\Auth::id() == null){
+// 		    $json_str = json_encode(['err_msg'=>'logout']);
+// 		    return $json_str;
+// 		}
 		
 		// JSON文字列をパースしてエンティティを取得する
 		$json=$_POST['key1'];
@@ -129,9 +133,11 @@ class NekoController extends AppController
 
 		$this->init();
 
-		if(\Auth::id() == null && $this->login_needed_flg == true){
-			return 'Error:ログイン認証が必要です。 Login is needed';
-		}
+// 		// すでにログアウトになったらlogoutであることをフロントエンド側に知らせる。
+// 		if(\Auth::id() == null){
+// 		    $json_str = json_encode(['err_msg'=>'logout']);
+// 		    return $json_str;
+// 		}
 		
 		// JSON文字列をパースしてエンティティを取得する
 		$json=$_POST['key1'];
@@ -169,7 +175,7 @@ class NekoController extends AppController
 	
 	
 	/**
-	 * Ajax | 自動保存
+	 * Ajax | ソート後の自動保存
 	 *
 	 * @note
 	 * バリデーション機能は備えていない
@@ -179,17 +185,27 @@ class NekoController extends AppController
 		
 		$this->init();
 		
-		if(\Auth::id() == null && $this->login_needed_flg == true){
-			return 'Error:ログイン認証が必要です。 Login is needed';
-		}
+// 		// すでにログアウトになったらlogoutであることをフロントエンド側に知らせる。
+// 		if(\Auth::id() == null){
+// 		    $json_str = json_encode(['err_msg'=>'logout']);
+// 		    return $json_str;
+// 		}
 		
 		$json=$_POST['key1'];
 		
 		$data = json_decode($json,true);//JSON文字を配列に戻す
 		
+		$data2 = [];
+		foreach($data as $ent){
+		    $data2[] = [
+		        'id' => $ent['id'],
+		        'sort_no' => $ent['sort_no'],
+		    ];
+		}
+		
 		// データ保存
 		$this->cb->begin();
-		$this->cb->saveAll($data); // まとめて保存。内部でSQLサニタイズされる。
+		$this->cb->saveAll($data2); // まとめて保存。内部でSQLサニタイズされる。
 		$this->cb->commit();
 		
 		$res = ['success'];
@@ -477,16 +493,17 @@ class NekoController extends AppController
 		$crud_base_path = CRUD_BASE_PATH;
 		require_once $crud_base_path . 'BulkReg.php';
 		
+		// すでにログアウトになったらlogoutであることをフロントエンド側に知らせる。
+		if(\Auth::id() == null){
+		    $json_str = json_encode(['err_msg'=>'logout']);
+		    return $json_str;
+		}
+		
+		$update_user = \Auth::user()->name; // ユーザー名
 		
 		// 更新ユーザーを取得
 		$update_user = 'none';
-		if(\Auth::id()){// idは未ログインである場合、nullになる。
-			$user_id = \Auth::id(); // ユーザーID（番号）
-			$update_user = \Auth::user()->name; // ユーザー名
-		}else{
-			throw new Exception('Login is needed. ログインが必要です。');
-			die();
-		}
+
 		
 		$json_param=$_POST['key1'];
 		$param = json_decode($json_param,true);//JSON文字を配列に戻す

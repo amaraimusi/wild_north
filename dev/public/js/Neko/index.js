@@ -1,6 +1,4 @@
 
-var nekouta = 128;
-
 
 jQuery(()=> {
 	init();//初期化
@@ -15,14 +13,8 @@ var crudBase;//AjaxによるCRUD
 /**
  *  ネコ画面の初期化
  * 
-  * ◇主に以下の処理を行う。
- * - 日付系の検索入力フォームにJQueryカレンダーを組み込む
- * - 列表示切替機能の組み込み
- * - 数値範囲系の検索入力フォームに数値範囲入力スライダーを組み込む
- * 
- * @version 1.2.2
- * @date 2015-9-16 | 2018-9-8
- * @author k-uehara
+ * @version 1.0.0
+ * @since 2022-1-25
  */
 function init(){
 	let csrf_token = jQuery('#csrf_token').val(); // CSRFトークンを取得（Ajaxで必要）
@@ -202,7 +194,12 @@ function _getValidMethods(){
  * @param btnElm ボタン要素
  */
 function newInpShow(btnElm, ni_tr_place){
-	crudBase.newInpShow(btnElm, {'ni_tr_place':ni_tr_place});
+//	crudBase.newInpShow(btnElm, {'form_mode':2,
+//				'callBack':(tr,form,ent)=>{
+//					console.log('コールバック実行テストX');//■■■□□□■■■□□□
+//				}
+//	});
+	crudBase.newInpShow(btnElm, {'ni_tr_place':ni_tr_place});//■■■□□□■■■□□□
 }
 
 /**
@@ -210,8 +207,16 @@ function newInpShow(btnElm, ni_tr_place){
  * @param btnElm ボタン要素
  */
 function editShow(btnElm){
-	var option = {};
-	crudBase.editShow(btnElm,option);
+	
+	crudBase.editShow(btnElm, 
+			{
+				'form_mode':2, // フォームモード 0:ダイアログモード , 1:アコーディオンモード(デフォルト）, 2:一覧非表示＆フォーム表示
+				'callBack':(tr,form,ent)=>{
+					console.log('コールバック実行テスト');//■■■□□□■■■□□□
+				}
+			}
+		);
+		
 }
 
 
@@ -221,7 +226,8 @@ function editShow(btnElm){
  * @param btnElm ボタン要素
  */
 function copyShow(btnElm){
-	crudBase.copyShow(btnElm);
+	//crudBase.copyShow(btnElm);
+	crudBase.copyShow(btnElm, {'form_mode':2});
 }
 
 
