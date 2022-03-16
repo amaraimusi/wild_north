@@ -88,8 +88,6 @@ http://localhost/crud_base_laravel8/dev/public/
 いずれのアカウントもパスワードは「abcd1234」になります。
 
 ```
-master2201     クライアント(マスター)
-client_test1   クライアント
-test2       病院スタッフ管理者	サンプル病院A
-shoutoku    病院スタッフ管理者	サンプル病院B
+
+
 ```
