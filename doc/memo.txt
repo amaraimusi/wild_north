@@ -18,7 +18,19 @@
 〇cbl8を移植し、管理画面プロジェクトを作り直したほうが速いかも。
 〇管理画面を作りなおし。
 〇	フォーク＆gitコミット
-	composer update
+〇	composer update
+〇	DB設定
+〇DBの修正
+〇	wild_noth2 DBを作成しwild_nort.sqlをインポートする
+〇	wild_northのテーブルをすべて削除し、cbl8.sqlをインポートする
+〇	wild_nothの特定テーブルを移植する
+ダッシュボードにアクセスするテスト
+〇	http://localhost/wild_north/dev/public/
+〇	DBパスワードのバグ
+〇	WNブックマークを作成する。（既存があるならそれを使う）
+〇	wild_north2データベースの除去
+	sqlのバックアップ
 cbl8の見本ユーザーを記載
+dev2のstrageに移植用データがあるか調べる。
 環境手順書へのリンク	
 
