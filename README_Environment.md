@@ -86,7 +86,10 @@ http://localhost/crud_base_laravel8/dev/public/
 
 ⑪検証用のアカウントは以下の通りです。
 いずれのアカウントもパスワードは「abcd1234」になります。
-
+	
+```
+himiko@example.com
+ono_no_imoko@example.com
 ```
 
 
