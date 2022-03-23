@@ -23,7 +23,7 @@ exec winpty bash
 ⑤ GitHubからプロジェクトを取り込みます。
 
 ```
-git clone git@github.com:amaraimusi/crud_base_laravel8.git
+git clone git@github.com:amaraimusi/wild_north.git
 ```
 
 ⑥開発環境のphp.iniを開きmemory_limitの容量を確認してください。「512M」だと後述のvendorインストールでメモリ不足エラーが発生しますので3Gくらいに書き換えてください。
@@ -38,7 +38,7 @@ memory_limit=3G ←変更後
 ⑦ 下記のcomposerコマンドでvendorをインストールしてください。環境に合わせたパッケージがvendorに自動インストールされます。
 
 ```
-cd crud_base_laravel8/dev
+cd wild_north/dev
 composer update
 ```
 
@@ -60,14 +60,14 @@ composer require laravel/ui
 <br>
 
 
-⑦ MySQLにてcrud_base_laravel8データベースを作成してください。照合順序はutf8mb4_general_ciを選択してください。
+⑦ MySQLにてwild_northデータベースを作成してください。照合順序はutf8mb4_general_ciを選択してください。
 
 ```
 例
-CREATE DATABASE crud_base_laravel8 COLLATE utf8mb4_general_ci
+CREATE DATABASE wild_north COLLATE utf8mb4_general_ci
 ```
 
-⑧ crud_base_laravel8.sqlダンプファイル(crud_base_laravel8/doc/crud_base_laravel8.sql)をインポートしてください。
+⑧ wild_north.sqlダンプファイル(wild_north/doc/wild_north.sql)をインポートしてください。
 
 マイグレーションはご用意しておりません。phpmyadminかmysqlコマンドなどをご利用ください。
 
@@ -81,7 +81,7 @@ CREATE DATABASE crud_base_laravel8 COLLATE utf8mb4_general_ci
 
 ```
 例
-http://localhost/crud_base_laravel8/dev/public/
+http://localhost/wild_north/dev/public/
 ```
 
 ⑪検証用のアカウントは以下の通りです。
